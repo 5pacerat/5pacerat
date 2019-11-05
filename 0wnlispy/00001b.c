@@ -2,28 +2,34 @@
  * with only small changes and errors by me*/
 
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "editline/readline.h"
+#include "editline/history.h"
 
 // declare buffer for input size 2048
 
-static char input[2048];
 
 int main(int argc, char** argv) {
 
 	// print version and exit info
-	puts("0wnlispy v 0.0.0.0.1 a");
+	puts("0wnlispy v 0.0.0.0.1 b");
 	puts("Press ctrl + c to Exit\n");
 
 	// loooping
 	while (1) {
 
-		// output prompt
-		fputs("0wnlispy> ", stdout);
+		// output prompt get input
+		char* input = readline("0wnlispy> ");
 
-		// read user input max 2048
-		fgets(input, 2048, stdin);
+		// add input to history
+		add_history(input);
 
 		// echo input back
 		printf("\nHey, did you just say %s\n", input);
+
+		//free retrieved input
+		free(input);
 	}
 
 	return 0;
